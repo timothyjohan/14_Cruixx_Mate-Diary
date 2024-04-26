@@ -7,7 +7,7 @@ export default function Home(){
         <>
             <Navbar />
             <h1 className="">hello home</h1>
-            <div className="min-h-screen scrollbar scrollbar-thin">
+            <div className="min-h-screen">
                 <Outlet />
 
             </div>
