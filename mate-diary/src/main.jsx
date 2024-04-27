@@ -9,9 +9,8 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import ShowHistory from './pages/ShowHistory.jsx';
 import FamilyTree from './pages/FamilyTree.jsx';
-import AddAnimal from './pages/AddAnimal.jsx';
 import History from './pages/History.jsx';
-
+import ShowDetailHistory from './pages/ShowDetailHistory.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import HomeLogged from './pages/HomeLogged.jsx';
 import MyAnimals from './pages/MyAnimals.jsx';
@@ -42,10 +41,10 @@ const router = createBrowserRouter([
         path: "/AddAnimal",
         element: <AddAnimal />,
       },
-      {
-        path: "/History",
-        element: <History />,
-      },
+      // {
+      //   path: "/History",
+      //   element: <History />,
+      // },
       {
         path: "/Home",
         element: <HomeLogged />
@@ -61,6 +60,10 @@ const router = createBrowserRouter([
       { 
         path: "/history",
         element: <ShowHistory/>
+      },
+      { 
+        path: "/mate/history/:id_h_kawin",
+        element: <ShowDetailHistory/>
       }
     ]
   }
