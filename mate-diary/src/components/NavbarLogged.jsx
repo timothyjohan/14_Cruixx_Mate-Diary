@@ -11,6 +11,7 @@ export default function NavbarLogged(){
         removeCookie('currentUser')
         navigate("/")
     }
+    
     return(
         <>
             <nav className="border-gray-200 bg-[#B99470] mb-16">
