@@ -44,7 +44,7 @@ export default function AddUser() {
         <div className="items-center justify-center">
             <div>
                 <h1 className="text-xl mb-16 font-bold">Mating Sessions</h1>
-                <button onClick={()=> navigate('add')} className="transition-all px-4 py-2 text-white bg-[#B5C18E] hover:bg-[#DEAC80] rounded-xl my-auto">Add Animal</button>
+                <button onClick={()=> navigate('add')} className="transition-all px-4 py-2 text-white bg-[#B5C18E] hover:bg-[#DEAC80] rounded-xl my-auto">Add Session</button>
             </div>
         {
             history.map((data, index) => (
