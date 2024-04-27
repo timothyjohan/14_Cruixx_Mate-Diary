@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { emitToast } from "../utility/toast/toast";
 import axios from 'axios'
+import { useCookies } from "react-cookie";
 
 export default function Login(){
     const {register, handleSubmit} = useForm()
     const [message, setMessage] = useState(null)
     const [success, setSuccess] = useState(null)
+    const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
+    const navigate = useNavigate()
 
     const signIn = async (data, e) =>{
         // console.log(data);
@@ -16,6 +19,8 @@ export default function Login(){
         try {
             await axios.post(`http://localhost:3000/login`,data)
             emitToast(`${data.username} login succesfully !`, "success")
+            setCookie('currentUser', data.username)
+            navigate("/home")
             e.target.clear()
         } catch(e) {
             if(e.response.data.msg) {
@@ -37,11 +42,11 @@ export default function Login(){
                         <form onSubmit={handleSubmit(signIn)}>
                             <div className="my-2">
                                 <label for="username" class="block mb-2 text-sm font-medium">Your username</label>
-                                <input {...register("username")} type="text" name="username" id="username" class="text-white bg-[#F7DCB9] text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Username" required="" />
+                                <input {...register("username")} type="text" name="username" id="username" class="text-black bg-[#F7DCB9] sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Username" required="" />
                             </div>
                             <div className="my-2">
                                 <label for="password" class="block mb-2 text-sm font-medium">Password</label>
-                                <input {...register("password")} type="password" name="password" id="password" placeholder="••••••••" class="text-white bg-[#F7DCB9] text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <input {...register("password")} type="password" name="password" id="password" placeholder="••••••••" class=" bg-[#F7DCB9] text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
                             <div class="flex items-center justify-between">
                                 <div class="flex items-start">
