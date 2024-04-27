@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import subscriptionImage from '../assets/subscription.png'
 export default function Subscription(){
     const [snapToken, setSnapToken] = useState(null);
     const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -31,7 +32,8 @@ export default function Subscription(){
     };
 
     const handleSnapSuccess = () => {
-        
+        navigate('/home')
+        emitToast(`You have been promoted to a premium user!`, "success")
     };
 
     useEffect(() => {
