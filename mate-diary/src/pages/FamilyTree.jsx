@@ -15,7 +15,7 @@ export default function FamilyTree(){
     const [animalDetail, setAnimalDetail] = useState({})
     const [timerId, setTimerId] = useState(null)
 
-    const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
+    const [cookies, setCookie, removeCookie] = useCookies(['currentUser', 'currentAnimal']);
     const [currentUser, setCurrentUser] = useState(null)
 
     const fetchLogged = async ()  =>{
@@ -26,9 +26,22 @@ export default function FamilyTree(){
         setCurrentUser(result.data.msg)
     }
 
+    const checkCookie = () =>{
+        if(cookies.currentAnimal){
+            debouncedFetchNamaChildHewan(cookies.currentAnimal.nama_panggilan)
+            fetchFamilyTree(cookies.currentAnimal.id_animal)
+            setAnimalChildData(cookies.currentAnimal)
+        }
+    }
+
     useEffect(()=>{
         fetchLogged()
+        checkCookie()
     },[])
+
+    useEffect(()=>{
+        checkCookie()
+    },[currentUser])
 
     const fetchNamaChildHewan = (nama) => {
         if(nama.length === 0) {
@@ -194,7 +207,7 @@ export default function FamilyTree(){
                                         class="bg-yellow-500 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("ayah")}
                                     >
-                                        [AYAH]
+                                        [FATHER: {animalTree.ayah.nama_panggilan}]
                                     </button>
                                 )
                             }
@@ -205,7 +218,7 @@ export default function FamilyTree(){
                                         class="bg-yellow-600 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("ibu")}
                                     >
-                                        [IBU]
+                                        [MOTHER: {animalTree.ibu.nama_panggilan}]
                                     </button>
                                 )
                             }
@@ -241,7 +254,7 @@ export default function FamilyTree(){
                                 class="bg-green-500 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                 onClick={() => fetchDetail("anak")}
                             >
-                                [ANAK]
+                                [CHILD: {animalTree.anak.nama_panggilan}]
                             </button>
                         </div>
                     )}
