@@ -108,8 +108,8 @@ export default function AddAnimal(){
             <p class="text-2xl">
                 Add Animal
             </p>
-            <div class="flex flex-col items-center justify-center px-6" style={{marginBottom: "64px"}}>
-                <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
+            <div class="flex flex-col items-center text-white justify-center px-6" style={{marginBottom: "64px"}}>
+                <div class="w-full bg-[#B99470] rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
                     <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <form onSubmit={handleSubmit(addAnimal)}>
                             <div className="my-5">
@@ -117,8 +117,8 @@ export default function AddAnimal(){
                                 <input {...register("nama_hewan")} onChange={(e) => {
                                     register("nama_hewan").onChange(e);
                                     debouncedFetchNamaHewan(e.target.value, 1);
-                                }} type="text" name="nama_hewan" id="nama_hewan" class="text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Hewan" required="" />
-                                <div id="dropdown-states" class="overflow-y-scroll max-h-20 h-auto z-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-100 dark:bg-gray-700">
+                                }} type="text" name="nama_hewan" id="nama_hewan" class="text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Hewan" required="" />
+                                <div id="dropdown-states" class="overflow-y-scroll max-h-20 h-auto z-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-100 dark:bg-[#F7DCB9]">
                                     {
                                         currentDropDown.length > 0 && (
                                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
@@ -140,11 +140,11 @@ export default function AddAnimal(){
                             </div>
                             <div className="my-5">
                                 <label for="kode_hewan" class="block mb-2 text-sm font-medium">Kode Hewan <sup>(*)</sup></label>
-                                <input {...register("kode_hewan")} type="text" name="kode_hewan" id="kode_hewan" class="text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Hewan" required="" />
+                                <input {...register("kode_hewan")} type="text" name="kode_hewan" id="kode_hewan" class="text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Hewan" required="" />
                             </div>
                             <div className="my-5">
                                 <label for="gender" class="block mb-2 text-sm font-medium">Gender Hewan <sup>(*)</sup></label>
-                                <select {...register("gender")} type="text" name="gender" id="gender" class="text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Gender Hewan" required="">
+                                <select {...register("gender")} type="text" name="gender" id="gender" class="text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Gender Hewan" required="">
                                     <option value="MALE">
                                         Male
                                     </option>
@@ -155,14 +155,14 @@ export default function AddAnimal(){
                             </div>
                             <div className="my-5">
                                 <label for="nama_panggilan" class="block mb-2 text-sm font-medium">Nama Panggilan Hewan</label>
-                                <input {...register("nama_panggilan")} type="text" name="nama_panggilan" id="nama_panggilan" class="text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Panggilan Hewan" required="" />
+                                <input {...register("nama_panggilan")} type="text" name="nama_panggilan" id="nama_panggilan" class="text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Panggilan Hewan" required="" />
                             </div>
                             <div className="my-5">
                                 <label for="asal_hewan" class="block mb-2 text-sm font-medium">Asal Hewan Hewan</label>
-                                <input {...register("asal_hewan")} type="text" name="asal_hewan" id="asal_hewan" class="text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Asal Hewan" required="" />
+                                <input {...register("asal_hewan")} type="text" name="asal_hewan" id="asal_hewan" class="text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Asal Hewan" required="" />
                             </div>
                             <div className="my-5">
-                                <input onClick={(e) => setIsChild(e.target.checked)} {...register("is_child")} type="checkbox" name="is_child" id="is_child" class="inline text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <input onClick={(e) => setIsChild(e.target.checked)} {...register("is_child")} type="checkbox" name="is_child" id="is_child" class="inline text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                                 <label for="is_child" class="inline ml-3 mb-2 text-sm font-medium">Merupakan Child</label>
                             </div>
                             {
@@ -174,8 +174,8 @@ export default function AddAnimal(){
                                                 <input {...register("parent_male")} onChange={(e) => {
                                                     register("parent_male").onChange(e);
                                                     debouncedFetchNamaParentHewan(e.target.value, 2, "MALE");
-                                                }} type="text" name="parent_male" id="parent_male" class="text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ayah Hewan" required="" />
-                                                <div id="dropdown-states" class="overflow-y-scroll max-h-20 h-auto z-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-100 dark:bg-gray-700">
+                                                }} type="text" name="parent_male" id="parent_male" class="text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ayah Hewan" required="" />
+                                                <div id="dropdown-states" class="overflow-y-scroll max-h-20 h-auto z-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-100 dark:bg-[#F7DCB9]">
                                                 {
                                                     currentDropDown2.length > 0 && (
                                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
@@ -200,8 +200,8 @@ export default function AddAnimal(){
                                                 <input {...register("parent_fem")} onChange={(e) => {
                                                     register("parent_fem").onChange(e);
                                                     debouncedFetchNamaParentHewan(e.target.value, 3, "FEMALE");
-                                                }} type="text" name="parent_fem" id="parent_fem" class="text-white bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ibu Hewan" required="" />
-                                                <div id="dropdown-states" class="overflow-y-scroll max-h-20 h-auto z-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-100 dark:bg-gray-700">
+                                                }} type="text" name="parent_fem" id="parent_fem" class="text-black bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#F7DCB9] dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ibu Hewan" required="" />
+                                                <div id="dropdown-states" class="overflow-y-scroll max-h-20 h-auto z-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-100 dark:bg-[#F7DCB9]">
                                                     {
                                                         currentDropDown3.length > 0 && (
                                                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
@@ -231,7 +231,7 @@ export default function AddAnimal(){
                                 {
                                     success ? <div className="w-full bg-green-400 p-1.5 pl-3 text-white">{success}</div> : null
                                 }
-                                <button type="submit" class="w-full mt-2 text-white bg-black hover:bg-black-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add Animal</button>
+                                <button type="submit" class="w-full mt-2 text-white bg-[#DEAC80] hover:bg-[#B5C18E] focus:ring-4 focus:outline-none focus:ring-primary-00 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add Animal</button>
                             </div>
                         </form>
                     </div>
