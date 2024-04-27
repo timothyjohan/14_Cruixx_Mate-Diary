@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Template from './pages/Template.jsx';
 import Home from './pages/Home.jsx';
+import AddUser from './pages/AddUser.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       {
         path: "/Home",
         element: <HomeLogged />,
-      }
+      },
+      { 
+        path: "/karyawan/add",
+        element: <AddUser/>
+      },
     ]
   }
 ]);
