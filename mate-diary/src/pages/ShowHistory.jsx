@@ -6,25 +6,28 @@ import { emitToast } from "../utility/toast/toast";
 import axios from 'axios'
 import { useCookies } from "react-cookie";
 
-export default function AddUser() {
-    const {register, handleSubmit} = useForm()
+export default function ShowHistory() {
+    const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
+    const [currentUser, setCurrentUser] = useState(null)
+
+    const fetchLogged = async ()  =>{
+        const data = {
+            username: cookies.currentUser
+        }
+        const result = await axios.post(`http://localhost:3000/user?username=${cookies.currentUser}`)
+        setCurrentUser(result.data.msg)
+    }
       const [message, setMessage] = useState(null)
       const [success, setSuccess] = useState(null)
       const [history, setHistory] = useState([])
-      const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
-      const [currentUser, setCurrentUser] = useState(null)
+      
       const navigate = useNavigate()
-  
-      const fetchLogged = async ()  =>{
-          const data = {
-              username: cookies.currentUser
-          }
-          const result = await axios.post(`http://localhost:3000/user?username=${cookies.currentUser}`)
-          setCurrentUser(result.data.msg)
-      }
+
   
       useEffect(()=>{
-          fetchLogged()
+        fetchLogged()
+        fetchHistory()
+
       },[])
   
       const fetchHistory = async () => {
@@ -63,8 +66,9 @@ export default function AddUser() {
             ))
         }
         </div>
-    
-    );
+    ) 
   }
-  
+
+    
+
   

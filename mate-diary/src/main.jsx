@@ -9,7 +9,8 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import ShowHistory from './pages/ShowHistory.jsx';
 import FamilyTree from './pages/FamilyTree.jsx';
-
+import History from './pages/History.jsx';
+import ShowDetailHistory from './pages/ShowDetailHistory.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import HomeLogged from './pages/HomeLogged.jsx';
 import MyAnimals from './pages/MyAnimals.jsx';
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
         path: "/tree",
         element: <FamilyTree/>
       },
+      {
+        path: "/mate/history/:id_h_kawin",
+        element: <ShowDetailHistory/>
+      }
     ]
   }
 ])
