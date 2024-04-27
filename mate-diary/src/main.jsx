@@ -8,11 +8,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />
-  },
-  {
-    path: "/app",
-    element: <App />
-  },
+  }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
