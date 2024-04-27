@@ -30,9 +30,9 @@ export default function HomeLogged(){
                     <>
                         <h1 className="text-2xl font-bold mb-10">Welcome, {currentUser.nickname}</h1>
 
-                        <div className="xl:ml-32 grid grid-cols-1 xl:grid-cols-3 mx-auto grid-center grid-flow-row mx-auto">
-                            <Link className="mb-24 xl:mb-0">
-                                <div className="h-80 w-80 bg-[#DEAC80] p-2 rounded-xl hover:scale-110 transition-all">
+                        <div className=" xl:ml-64  grid grid-cols-1 xl:grid-cols-2 mx-auto grid-center grid-flow-row mx-auto">
+                            <Link to={"/myanimals"}  className="mb-24 xl:mb-0">
+                                <div className="xl:h-96 xl:w-96 bg-[#DEAC80] p-2 rounded-xl hover:scale-110 transition-all">
                                     <div className=" flex justify-center items-center">
                                         <img src="/animals.png" className="max-w-full max-h-full" />
                                     </div>
@@ -43,23 +43,12 @@ export default function HomeLogged(){
                                     
                                 </div>
                             </Link>
-                            <Link className="mb-24 xl:mb-0">
-                                <div className="h-80 w-80 bg-[#FDE3A8] p-2 rounded-xl hover:scale-110 transition-all">
-                                    <div className=" flex justify-center items-center">
-                                        <img src="/add_animal.jpg" className="max-w-52 max-w-52 " />
-                                    </div>
-                                    <div className="py-8">
-                                        <h1 className="text-center text-xl text-gray-600 font-bold">Add Animals</h1>
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </Link>
+                            
 
                             <Link className="mb-24 xl:mb-0">
-                                <div className="h-80 w-80 bg-[#FDCBCC] p-2 rounded-xl hover:scale-110 transition-all">
+                                <div className="xl:h-96 xl:w-96 bg-[#FDCBCC] p-2 rounded-xl hover:scale-110 transition-all">
                                     <div className=" flex justify-center items-center">
-                                        <img src="/mate.png" className="max-w-52 max-w-52" />
+                                        <img src="/mate.png" className="max-h-52 xl:max-w-64 xl:max-h-64" />
                                     </div>
                                     <div className="py-8">
                                         <h1 className="text-center text-xl text-white font-bold">Mating Session</h1>
