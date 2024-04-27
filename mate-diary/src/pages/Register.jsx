@@ -1,6 +1,3 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { emitToast } from "../utility/toast/toast";
 import axios from 'axios'
