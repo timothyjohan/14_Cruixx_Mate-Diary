@@ -51,8 +51,8 @@ export default function ShowDetailHistory() {
               <div className="pt-2">{(data.animal_fem)}</div>
               <div className="pt-2">{(data.status)}</div>
               <div className="pt-auto">
-                <Link to={`/mate/history`}>
-                <button className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-800 my-auto">Back</button>
+                <Link to={`/history`}>
+                  <button className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-800 my-auto">Back</button>
                 </Link>
               </div>
             </div>
