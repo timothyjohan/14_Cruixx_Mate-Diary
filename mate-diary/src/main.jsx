@@ -16,6 +16,7 @@ import HomeLogged from './pages/HomeLogged.jsx';
 import MyAnimals from './pages/MyAnimals.jsx';
 import AddAnimal from './pages/AddAnimal.jsx';
 import AddSession from './pages/AddSession.jsx';
+import Subscription from './pages/Subscription.jsx';
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/history/add",
         element: <AddSession/>
+      },
+      { 
+        path: "/subscription",
+        element: <Subscription />
       },
     ]
   }
