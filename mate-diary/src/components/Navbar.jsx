@@ -21,12 +21,9 @@ export default function Navbar(){
                         <li>
                             <Link to={"/"}><a className="block py-2 px-3 text-white rounded md:p-0 text-zinc-100" aria-current="page">Home</a></Link>
                         </li>
-
+                    
                         <li>
-                            <Link to={"/login"}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">Login</a></Link>
-                        </li>
-                        <li>
-                            <Link to={"/register"}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">Register</a></Link>
+                            <Link to={"/list"}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">List</a></Link>
                         </li>
                     </ul>
                     </div>
