@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import HomeLogged from './pages/HomeLogged.jsx';
 import MyAnimals from './pages/MyAnimals.jsx';
 import AddAnimal from './pages/AddAnimal.jsx';
+import AddSession from './pages/AddSession.jsx';
 
 const router = createBrowserRouter([
   {
@@ -64,7 +65,11 @@ const router = createBrowserRouter([
       {
         path: "/mate/history/:id_h_kawin",
         element: <ShowDetailHistory/>
-      }
+      },
+      {
+        path: "/history/add",
+        element: <AddSession/>
+      },
     ]
   }
 ])
