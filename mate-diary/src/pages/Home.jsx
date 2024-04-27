@@ -6,7 +6,6 @@ export default function Home(){
     return(
         <>
             <Navbar />
-            <h1 className="">hello home</h1>
             <div className="min-h-screen">
                 <Outlet />
 
