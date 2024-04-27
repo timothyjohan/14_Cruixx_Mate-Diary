@@ -4,7 +4,8 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { emitToast } from "../utility/toast/toast";
 import axios from 'axios'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 export default function FamilyTree(){
     const [valueInputAnimal, setValueInputAnimal] = useState("")
@@ -14,12 +15,28 @@ export default function FamilyTree(){
     const [animalDetail, setAnimalDetail] = useState({})
     const [timerId, setTimerId] = useState(null)
 
+    const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
+    const [currentUser, setCurrentUser] = useState(null)
+
+    const fetchLogged = async ()  =>{
+        const data = {
+            username: cookies.currentUser
+        }
+        const result = await axios.post(`http://localhost:3000/user?username=${cookies.currentUser}`)
+        setCurrentUser(result.data.msg)
+    }
+
+    useEffect(()=>{
+        fetchLogged()
+    },[])
+
     const fetchNamaChildHewan = (nama) => {
         if(nama.length === 0) {
             setAnimalDropdown([])
             return
         }
-        axios.get(`http://localhost:3000/animal?username=buse1&password=buse123&nickname=${nama}`).then((responseData) => {
+
+        axios.get(`http://localhost:3000/animal?username=${currentUser.username}&password=${currentUser.password}&nickname=${nama}`).then((responseData) => {
             const animalData = responseData.data.msg;
             setAnimalDropdown([...animalData])
         });
