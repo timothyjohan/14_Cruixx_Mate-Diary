@@ -7,6 +7,7 @@ import Template from './pages/Template.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import ShowHistory from './pages/ShowHistory.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import HomeLogged from './pages/HomeLogged.jsx';
 import MyAnimals from './pages/MyAnimals.jsx';
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         path: "/myanimals/add",
         element: <AddAnimal />,
       },
+      { 
+        path: "/history",
+        element: <ShowHistory/>
+      }
     ]
   }
 ]);
