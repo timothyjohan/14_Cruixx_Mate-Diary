@@ -32,6 +32,13 @@ export default function NavbarLogged(){
                         <li>
                             <Link onClick={logoutClick}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">Logout</a></Link>
                         </li>
+                        <li>
+                            <Link onClick={logoutClick}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">Mating Session</a></Link>
+                        </li>
+                        <li>
+                            <Link onClick={logoutClick}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">My animals</a></Link>
+
+                        </li>
                     </ul>
                     </div>
                 </div>
