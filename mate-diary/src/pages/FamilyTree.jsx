@@ -37,6 +37,7 @@ export default function FamilyTree(){
             const animalTree = responseData.data.msg;
             setValueInputAnimal(animalTree.anak.nama_panggilan)
             setAnimalTree({...animalTree})
+            setAnimalDetail({...animalTree.anak})
         });
     }
 
@@ -255,7 +256,7 @@ export default function FamilyTree(){
                         </h1>
                         <div class="flex justify-end">
                             {
-                                animalDetail.id_animal && animalDetail.id_animal !== animalChildData.id_animal && (
+                                (animalDetail.id_animal && animalDetail.id_animal !== animalTree.anak.id_animal) && (
                                 <button
                                     type="button"
                                     class="text-right bg-sky-500 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"

@@ -43,9 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/History",
         element: <History />,
-      }
+      },
+      {
         path: "/Home",
-        element: <HomeLogged />,
+        element: <HomeLogged />
       },
       { 
         path: "/karyawan/add",
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       },
     ]
   }
-]);
+])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ToastContainer
