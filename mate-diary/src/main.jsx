@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import 'react-toastify/dist/ReactToastify.css';
+import HomeLogged from './pages/HomeLogged.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/Register",
         element: <Register />,
+      },
+      {
+        path: "/Home",
+        element: <HomeLogged />,
       }
     ]
   }

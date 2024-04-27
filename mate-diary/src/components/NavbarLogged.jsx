@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import { useCookies } from "react-cookie";
 
-export default function Navbar(){
+export default function NavbarLogged(){
     const [isOpen, setIsOpen] = useState(false);
+    const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
+    const navigate = useNavigate()
 
+    const logoutClick = () => {
+        removeCookie('currentUser')
+        navigate("/")
+    }
     return(
         <>
             <nav className="border-gray-200 bg-[#B99470] mb-16">
@@ -19,14 +26,11 @@ export default function Navbar(){
                     <div className={`${isOpen ? 'block' : 'hidden'} transition-all w-full md:block md:w-auto`} id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  border-gray-700">
                         <li>
-                            <Link to={"/"}><a className="block py-2 px-3 text-white rounded md:p-0 text-zinc-100" aria-current="page">Home</a></Link>
+                            <Link to={"/home"}><a className="block py-2 px-3 text-white rounded md:p-0 text-zinc-100" aria-current="page">Home</a></Link>
                         </li>
 
                         <li>
-                            <Link to={"/login"}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">Login</a></Link>
-                        </li>
-                        <li>
-                            <Link to={"/register"}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">Register</a></Link>
+                            <Link onClick={logoutClick}><a className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 text-white hover:text-zinc-300">Logout</a></Link>
                         </li>
                     </ul>
                     </div>
