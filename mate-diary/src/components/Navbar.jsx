@@ -9,6 +9,7 @@ export default function Navbar(){
             <nav className="border-gray-200 bg-[#B99470] mb-16">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src="/logo.png" alt="" srcset="" className="w-10 h-10"/>
                         <span className="self-center text-2xl font-bold whitespace-nowrap text-white">Mate Diary</span>
                     </div>
                     <button onClick={() => setIsOpen(!isOpen)} type="button" className={`transition-all ${isOpen ? 'rotate-90' : ''} inline-flex items-center p-1 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400 hover:bg-gray-700 focus:ring-gray-600`} aria-controls="navbar-default" aria-expanded="false">
