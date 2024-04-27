@@ -7,6 +7,8 @@ import Template from './pages/Template.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import FamilyTree from './pages/FamilyTree.jsx';
+import AddAnimal from './pages/AddAnimal.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "/Register",
         element: <Register />,
+      },
+      {
+        path: "/FamilyTree",
+        element: <FamilyTree />,
+      },
+      {
+        path: "/AddAnimal",
+        element: <AddAnimal />,
       }
     ]
   }
