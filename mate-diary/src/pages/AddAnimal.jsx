@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { emitToast } from "../utility/toast/toast";
 import axios from 'axios'
+import { useCookies } from "react-cookie";
 
 export default function AddAnimal(){
     const api_key_ninja = "gkTS6Qheb1LyvqHe3cf9uw==o0kuQj1oopyTEmaZ";
@@ -22,11 +23,19 @@ export default function AddAnimal(){
     const [ayahHewan, setAyahHewan] = useState("")
     const [ibuHewan, setIbuHewan] = useState("")
 
+    const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
+    const [animals, setAnimals] = useState([null])
+    const [currentUser, setCurrentUser] = useState(null)
+
+    const fetchLogged = async ()  =>{
+        const result = await axios.post(`http://localhost:3000/user?username=${cookies.currentUser}`)
+        setCurrentUser(result.data.msg)
+    }
     const addAnimal = async (data, e) => {
         // console.log(data);
         setMessage(null)
         try {
-            await axios.post(`http://localhost:3000/animal?username=buse1&password=buse123`, {...data, "parent_male": ayahHewan, "parent_fem": ibuHewan})
+            await axios.post(`http://localhost:3000/animal?username=${currentUser.username}&password=${currentUser.password}`, {...data, "parent_male": ayahHewan, "parent_fem": ibuHewan})
             emitToast(`${data.nama_panggilan} add animal succesfully !`, "success")
             e.target.clear()
         } catch(e) {
@@ -89,6 +98,10 @@ export default function AddAnimal(){
         const newTimerId2 = setTimeout(() => fetchNamaParentHewan(nama, flag, gender), 500);
         setTimerId(newTimerId2);
     }
+
+    useEffect(()=>{
+        fetchLogged()
+    },[])
 
     return(
         <>
