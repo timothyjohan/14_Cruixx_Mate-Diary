@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { Fade, Slide } from "react-awesome-reveal";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Home(){
     const [load, setLoad] = useState(false);
+    const navigate = useNavigate()
     useEffect(()=>{
         setLoad(true);
     })
+
+    const toLogin = () =>{
+        navigate("/login")
+    }
+    const toRegis = () =>{
+        navigate("/register")
+    }
     return(
         <>
         
@@ -23,8 +32,8 @@ export default function Home(){
                 
                 <div className="grid grid-cols-2 order-2 xl:order-3 mt-10 lg:-mt-72 text-xl">
                     
-                    <button type="button" className={`bg-[#B5C18E] mx-4 py-2 text-white rounded-md shadow-md xl:h-14 hover:scale-110 transition duration-700 ${load ? 'opacity-100' : 'opacity-0'}`}>Join Now</button>
-                    <button type="button" className={`bg-[#DEAC80] mx-4 text-white rounded-md shadow-md xl:h-14 hover:scale-110 transition duration-700 ${load ? 'opacity-100' : 'opacity-0'}`}>Log in</button>
+                    <button type="button" onClick={toRegis} className={`bg-[#B5C18E] mx-4 py-2 text-white rounded-md shadow-md xl:h-14 hover:scale-110 transition duration-700 ${load ? 'opacity-100' : 'opacity-0'}`}>Join Now</button>
+                    <button type="button" onClick={toLogin} className={`bg-[#DEAC80] mx-4 text-white rounded-md shadow-md xl:h-14 hover:scale-110 transition duration-700 ${load ? 'opacity-100' : 'opacity-0'}`}>Log in</button>
                         
                 </div>
                 <div className="order-1 xl:order-2">
