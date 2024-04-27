@@ -10,6 +10,8 @@ import Register from './pages/Register.jsx';
 import FamilyTree from './pages/FamilyTree.jsx';
 import AddAnimal from './pages/AddAnimal.jsx';
 import 'react-toastify/dist/ReactToastify.css';
+import HomeLogged from './pages/HomeLogged.jsx';
+import MyAnimals from './pages/MyAnimals.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,15 @@ const router = createBrowserRouter([
       {
         path: "/AddAnimal",
         element: <AddAnimal />,
-      }
+      },
+      {
+        path: "/Home",
+        element: <HomeLogged />,
+      },
+      {
+        path: "/myanimals",
+        element: <MyAnimals />,
+      },
     ]
   }
 ]);
