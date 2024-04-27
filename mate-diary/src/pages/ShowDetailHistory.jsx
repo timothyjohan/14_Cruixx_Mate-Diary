@@ -144,6 +144,14 @@ export default function ShowDetailHistory() {
                 )
 
             }
+            {
+            history.filter((data)=>data.id_h_kawin == id_h_kawin && data.status==="ONGOING").length!=0 && (
+              <div className="pt-auto">
+                <button className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 my-auto mr-2" onClick={()=>{endS('SUCCESS')}}>Success</button>
+                <button className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 my-auto" onClick={()=>{endS('FAIL')}}>Fail</button>
+              </div>
+            )
+          }
         </>
         :
         <>
