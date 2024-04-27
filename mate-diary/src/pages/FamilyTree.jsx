@@ -50,7 +50,7 @@ export default function FamilyTree(){
         if(!idAnimal) {
             return
         }
-        axios.get(`http://localhost:3000/animal/family/${idAnimal}?username=buse1&password=buse123`).then((responseData) => {
+        axios.get(`http://localhost:3000/animal/family/${idAnimal}?username=${currentUser.username}&password=${currentUser.password}`).then((responseData) => {
             const animalTree = responseData.data.msg;
             setValueInputAnimal(animalTree.anak.nama_panggilan)
             setAnimalTree({...animalTree})
