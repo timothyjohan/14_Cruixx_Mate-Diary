@@ -45,7 +45,7 @@ export default function HomeLogged(){
                             </Link>
                             
 
-                            <Link className="mb-24 xl:mb-0">
+                            <Link to={"/history"} className="mb-24 xl:mb-0">
                                 <div className="xl:h-96 xl:w-96 bg-[#FDCBCC] p-2 rounded-xl hover:scale-110 transition-all">
                                     <div className=" flex justify-center items-center">
                                         <img src="/mate.png" className="max-h-52 xl:max-w-64 xl:max-h-64" />

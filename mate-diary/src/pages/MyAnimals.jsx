@@ -47,7 +47,7 @@ export default function MyAnimals(){
                     animals.length > 1 ? 
                     <>  
                         <div>
-                            <h1 className="text-xl mb-16">My Animals</h1>
+                            <h1 className="text-xl mb-16 font-bold">My Animals</h1>
                             <button onClick={()=> navigate('add')} className="transition-all px-4 py-2 text-white bg-[#B5C18E] hover:bg-[#DEAC80] rounded-xl my-auto">Add Animal</button>
                         </div>
                         {
@@ -69,7 +69,12 @@ export default function MyAnimals(){
                     </>
                     :
                     <>
-                        <h1>Loading..</h1>
+                        <div>
+                            <h1 className="text-xl mb-16 font-bold">My Animals</h1>
+                            <button onClick={()=> navigate('add')} className="transition-all px-4 py-2 text-white bg-[#B5C18E] hover:bg-[#DEAC80] rounded-xl my-auto">Add Animal</button>
+                            <h1 className="text-xl mb-16 mt-44 text-center">You have no Animals</h1>
+                            
+                        </div>
                     </>
                 }
                 

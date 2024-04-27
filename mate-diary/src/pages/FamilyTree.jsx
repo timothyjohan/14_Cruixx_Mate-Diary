@@ -119,7 +119,7 @@ export default function FamilyTree(){
                                         class="bg-red-500 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("kakek_ayah")}
                                     >
-                                        [KAKEK AYAH]
+                                        [KAKEK AYAH: {animalTree.kakek_ayah.nama_panggilan}]
                                     </button>
                                 )
                             }
@@ -130,7 +130,7 @@ export default function FamilyTree(){
                                         class="bg-red-800 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("nenek_ayah")}
                                     >
-                                        [NENEK AYAH]
+                                        [KAKEK AYAH: {animalTree.nenek_ayah.nama_panggilan}]
                                     </button>
                                 )
                             }
@@ -141,7 +141,7 @@ export default function FamilyTree(){
                                         class="bg-red-500 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("kakek_ibu")}
                                     >
-                                        [KAKEK IBU]
+                                        [KAKEK IBU: {animalTree.kakek_ibu.nama_panggilan}]
                                     </button>
                                 )
                             }
@@ -152,7 +152,7 @@ export default function FamilyTree(){
                                         class="bg-red-800 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("nenek_ibu")}
                                     >
-                                        [NENEK IBU]
+                                        [KAKEK AYAH: {animalTree.nenek_ibu.nama_panggilan}]
                                     </button>
                                 )
                             }

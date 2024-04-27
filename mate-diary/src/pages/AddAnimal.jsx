@@ -77,7 +77,7 @@ export default function AddAnimal(){
             return
         }
         axios.get(
-        `http://localhost:3000/animal?username=buse1&password=buse123&nickname=${nama}&gender=${gender}`).then((responseData) => {
+        `http://localhost:3000/animal?username=${currentUser.username}&password=${currentUser.password}&nickname=${nama}&gender=${gender}`).then((responseData) => {
             const animalData = responseData.data.msg;
             if(flag === 2) {
                 setCurrentDropDown2([...animalData])
