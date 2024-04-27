@@ -14,6 +14,7 @@ export default function FamilyTree(){
     const [animalTree, setAnimalTree] = useState({})
     const [animalDetail, setAnimalDetail] = useState({})
     const [timerId, setTimerId] = useState(null)
+    const [premium, setPremium] = useState(false)
 
     const [cookies, setCookie, removeCookie] = useCookies(['currentUser', 'currentAnimal']);
     const [currentUser, setCurrentUser] = useState(null)
@@ -33,6 +34,14 @@ export default function FamilyTree(){
             setAnimalChildData(cookies.currentAnimal)
         }
     }
+    const checkPremium = async () =>{
+        // console.log(currentUser.id_company);
+        const result = await axios.get(`http://localhost:3000/company?id=${currentUser.id_company}`)
+        if(result.data.msg.status == "PREMIUM"){
+            setPremium(true)
+        }
+        console.log(result.data.msg);
+    }
 
     useEffect(()=>{
         fetchLogged()
@@ -41,6 +50,7 @@ export default function FamilyTree(){
 
     useEffect(()=>{
         checkCookie()
+        checkPremium()
     },[currentUser])
 
     const fetchNamaChildHewan = (nama) => {
@@ -109,7 +119,7 @@ export default function FamilyTree(){
             </div>
             
             <div class="grid grid-cols-2">
-                <div>
+                <div className={`${premium ? '' : 'blur'}`}>
                     {(animalTree.kakek_ayah || animalTree.kakek_ibu || animalTree.nenek_ayah || animalTree.nenek_ibu) && (
                         <div class="grid grid-cols-4 gap-2 my-5">
                             {
@@ -260,7 +270,9 @@ export default function FamilyTree(){
                     )}
                     
                     
+                    
                 </div>
+                
                 <div class="ml-10 w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
                     <div class="p-6 space-y-4 md:space-y-6">
                         <h1 class="text-sm font-bold leading-tight tracking-tight md:text-lg">
@@ -301,6 +313,20 @@ export default function FamilyTree(){
                         
                     </div>
                 </div>
+                {
+                premium ? 
+                <></>
+                :
+                <>
+                    <div>
+                        <h1 className="text-xl font-semibold">Want to unlock more features?</h1>
+                        <Link to={"/subscription"}>
+                            <button className="mt-2 text-xl text-white bg-[#DEAC80] hover:bg-[#B5C18E] focus:ring-4 focus:outline-none focus:ring-primary-00 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">GET PREMIUM</button>
+                        </Link>
+                    </div>
+                </>
+                }
+                
             </div>
         </>
     )

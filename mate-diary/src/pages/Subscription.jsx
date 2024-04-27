@@ -11,10 +11,22 @@ import subscriptionImage from '../assets/subscription.png'
 
 export default function Subscription(){
     const [snapToken, setSnapToken] = useState(null);
+    const [idComp, setIdComp] = useState(null);
     const [cookies, setCookie, removeCookie] = useCookies(['currentUser']);
     const navigate = useNavigate()
+    const [currentUser, setCurrentUser] = useState(null)
+
+    const fetchLogged = async ()  =>{
+        const data = {
+            username: cookies.currentUser
+        }
+        const result = await axios.post(`http://localhost:3000/user?username=${cookies.currentUser}`)
+        setCurrentUser(result.data.msg)
+    }
+
 
     useEffect(() => {
+        fetchLogged()
         const script = document.createElement('script');
         script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
         script.setAttribute('data-client-key', 'SB-Mid-client-t9vamsHp5lVGoR8Z');
@@ -24,6 +36,11 @@ export default function Subscription(){
         };
     }, []);
 
+    const checkIdComp = async () =>{
+        console.log(currentUser.id_company);
+        setIdComp(currentUser.id_company)
+    }
+
     const handleSnapClose = () => {
         if (document.body.style.overflowY === 'hidden') {
             document.body.style.overflowY = 'auto';
@@ -31,9 +48,15 @@ export default function Subscription(){
         setSnapToken(null)
     };
 
-    const handleSnapSuccess = () => {
+    const handleSnapSuccess = async () => {
+        try {
+            await axios.put(`http://localhost:3000/company?id=${idComp}`)
+            emitToast(`You have been promoted to a premium user!`, "success")
+            
+        } catch (error) {
+            
+        }
         navigate('/home')
-        emitToast(`You have been promoted to a premium user!`, "success")
     };
 
     useEffect(() => {
@@ -44,6 +67,11 @@ export default function Subscription(){
           });
         }
     }, [snapToken])
+
+    useEffect(() => {
+        checkIdComp()
+        console.log(idComp);
+    }, [currentUser])
 
     const sendMidtrans = async (e) => {
         e.preventDefault()
