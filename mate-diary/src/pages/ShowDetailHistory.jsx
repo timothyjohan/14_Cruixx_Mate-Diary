@@ -10,6 +10,7 @@ export default function ShowDetailHistory() {
   const [currentUser, setCurrentUser] = useState(null)
   const [history, setHistory] = useState([])
   const [detail, setDetail] = useState([])
+  const [countdown, setCountdown] = useState(null)
 
   const fetchLogged = async ()  =>{
     const data = {
@@ -65,8 +66,10 @@ export default function ShowDetailHistory() {
     const listHistory = await axios.get(`http://localhost:3000/history?username=${currentUser.username}&password=${currentUser.password}`)
     console.log('listHistory:', listHistory.data.msg); // Check your data
     const listDetail = await axios.get(`http://localhost:3000/history/details?username=${currentUser.username}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}`)
+    const cd = await axios.get(`http://localhost:3000/countdown?username=${currentUser.username}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}`)
     console.log('listDetail:', listDetail.data.msg); // Check your data
     console.log(id_h_kawin);
+    setCountdown(cd.data.msg)
     setHistory(listHistory.data.msg)
     setDetail(listDetail.data.msg)
   }
@@ -83,6 +86,11 @@ export default function ShowDetailHistory() {
 
   return (
     <div className="items-center justify-center">
+        {
+            history.filter((data)=>data.id_h_kawin == id_h_kawin && data.status==="ONGOING").length!=0 && (
+                <h1 className="text-3xl font-bold text-left pl-5 pt-5">Estimated Birth: {countdown}</h1>
+            )
+        }
       {history.map((data, index) => (
         (data.id_h_kawin == id_h_kawin) ? (
           <div key={index} className="flex items-center justify-between w-full p-4 my-2 bg-white rounded shadow-lg">
