@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios'
 import { useCookies } from "react-cookie";
+import { emitToast } from "../utility/toast/toast";
 
 export default function ShowDetailHistory() {
   const { id_h_kawin } = useParams();
@@ -18,6 +19,47 @@ export default function ShowDetailHistory() {
     setCurrentUser(result.data.msg)
   }
 
+  const buttonSF = async(status,id)=>{
+    try {
+        
+        const result = await axios.put(`http://localhost:3000/history/details?username=${cookies.currentUser}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}&status=${status}&id_d_kawin=${id}`)
+        emitToast(`Updated Successfully`, "success")
+    } catch (error) {
+        if(e.response.data.msg) {
+            emitToast(e.response.data.msg, "error")
+        } else {
+            emitToast(e.response.data, "error")
+        } 
+    }
+  }
+
+  const addDS = async()=>{
+    try {
+        
+        const result = await axios.post(`http://localhost:3000/history/details?username=${cookies.currentUser}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}`)
+        emitToast(`Added Successfully`, "success")
+    } catch (error) {
+        if(e.response.data.msg) {
+            emitToast(e.response.data.msg, "error")
+        } else {
+            emitToast(e.response.data, "error")
+        } 
+    }
+  }
+
+  const endS = async(status)=>{
+    try {
+        
+        const result = await axios.put(`http://localhost:3000/history?username=${cookies.currentUser}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}&status=${status}`)
+        emitToast(`Updated Successfully`, "success")
+    } catch (error) {
+        if(e.response.data.msg) {
+            emitToast(e.response.data.msg, "error")
+        } else {
+            emitToast(e.response.data, "error")
+        } 
+    }
+  }
   const fetchHistory = async () => {
     console.log(currentUser);
     const listHistory = await axios.get(`http://localhost:3000/history?username=${currentUser.username}&password=${currentUser.password}`)
@@ -74,10 +116,42 @@ export default function ShowDetailHistory() {
                   <div className="pt-2">{(index+1)}</div>
                   <div className="pt-2">{(data.id_d_kawin)}</div>
                   <div className="pt-2">{new Date(data.waktu_kawin).toLocaleString('en-GB')}</div>
-                  <div className="pt-2">{data.kawin_status == 1 ? "FAIL" : "SUCCESS" }</div>
+                  {data.kawin_status == 0 ? (
+                    <div className="pt-auto">
+                        <button className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 my-auto mr-2" onClick={()=>{buttonSF(2,detail[detail.length-1].id_d_kawin)}}>Success</button>
+                        <button className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 my-auto"  onClick={()=>{buttonSF(1,detail[detail.length-1].id_d_kawin)}}>Fail</button>
+                    </div>
+                    ) : data.kawin_status == 1 ? (
+                        <div className="pt-2">FAIL</div>
+                    ) : (
+                        <div className="pt-2">SUCCESS</div>
+                    )}
                 </div>
               </div>
           ))
+      }
+      {
+        // console.log(detail[detail.length-1].kawin_status)
+        detail.length > 0 ? 
+        
+        <>
+            {
+                detail[detail.length-1].kawin_status != 0 && history.filter((data)=>data.id_h_kawin == id_h_kawin && data.status==="BEFORE").length!=0 && (
+                    <div className="pt-auto">
+                    <button className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 my-auto mr-2" onClick={()=>{addDS()}}>Add Detail Session</button>
+                    <button className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 my-auto"  onClick={()=>{endS('ONGOING')}}>End Session</button>
+                </div>
+                )
+
+            }
+        </>
+        :
+        <>
+        
+        </> 
+        // detail[detail.length-1].kawin_status != 0 && history.find((data)=>data.status === "BEFORE") && (
+        //   <button className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 my-auto mr-2">Add Detail Kawin</button>
+        // )
       }
     </div>
   );
