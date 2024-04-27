@@ -11,7 +11,7 @@ export default function HomeLogged(){
         const data = {
             username: cookies.currentUser
         }
-        const result = await axios.get(`http://localhost:3000/user?username=${cookies.currentUser}`)
+        const result = await axios.post(`http://localhost:3000/user?username=${cookies.currentUser}`)
         setCurrentUser(result.data.msg)
     }
 
