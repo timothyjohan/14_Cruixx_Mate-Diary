@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx';
 import AddUser from './pages/AddUser.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import ShowHistory from './pages/ShowHistory.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import HomeLogged from './pages/HomeLogged.jsx';
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         path: "/karyawan/add",
         element: <AddUser/>
       },
+      { 
+        path: "/history",
+        element: <ShowHistory/>
+      }
     ]
   }
 ]);
