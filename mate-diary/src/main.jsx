@@ -8,6 +8,8 @@ import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import ShowHistory from './pages/ShowHistory.jsx';
+import FamilyTree from './pages/FamilyTree.jsx';
+
 import 'react-toastify/dist/ReactToastify.css';
 import HomeLogged from './pages/HomeLogged.jsx';
 import MyAnimals from './pages/MyAnimals.jsx';
@@ -31,8 +33,16 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: "/FamilyTree",
+        element: <FamilyTree />,
+      },
+      {
+        path: "/AddAnimal",
+        element: <AddAnimal />,
+      },
+      {
         path: "/Home",
-        element: <HomeLogged />,
+        element: <HomeLogged />
       },
       {
         path: "/myanimals",
@@ -45,10 +55,14 @@ const router = createBrowserRouter([
       { 
         path: "/history",
         element: <ShowHistory/>
-      }
+      },
+      { 
+        path: "/tree",
+        element: <FamilyTree/>
+      },
     ]
   }
-]);
+])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ToastContainer
