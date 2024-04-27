@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import Template from './pages/Template.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
@@ -10,16 +11,22 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />
-  },
-  {
-    path: "/Login",
-    element: <Login />,
-  },
-  {
-    path: "/Register",
-    element: <Register />,
+    path: "",
+    element: <Template />,
+    children:[
+      {
+        path: "",
+        element: <Home />
+      },
+      {
+        path: "/Login",
+        element: <Login />,
+      },
+      {
+        path: "/Register",
+        element: <Register />,
+      }
+    ]
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
