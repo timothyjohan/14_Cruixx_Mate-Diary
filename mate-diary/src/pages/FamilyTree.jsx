@@ -14,7 +14,8 @@ export default function FamilyTree(){
     const [animalTree, setAnimalTree] = useState({})
     const [animalDetail, setAnimalDetail] = useState({})
     const [timerId, setTimerId] = useState(null)
-    const [premium, setPremium] = useState(false)
+    const [kawinSuksesRate, setKawinSuksesRate] = useState("")
+    const [kawinEfektifRate, setKawinEfektifRate] = useState("")
 
     const [cookies, setCookie, removeCookie] = useCookies(['currentUser', 'currentAnimal']);
     const [currentUser, setCurrentUser] = useState(null)
@@ -53,7 +54,7 @@ export default function FamilyTree(){
         checkPremium()
     },[currentUser])
 
-    const fetchNamaChildHewan = (nama) => {
+    const fetchNamaChildHewan = async (nama) => {
         if(nama.length === 0) {
             setAnimalDropdown([])
             return
@@ -66,18 +67,86 @@ export default function FamilyTree(){
     }
 
     const fetchDetail = async (tag) => {
-        setAnimalDetail({...animalTree[tag]})
+        try {
+            const newAnimalDetail = {...animalDetail, ...animalTree[tag]};
+            setAnimalDetail(newAnimalDetail);
+    
+            let parentFemPromise = Promise.resolve({ data: { msg: { nama_panggilan: "-" } } });
+            let parentMalePromise = Promise.resolve({ data: { msg: { nama_panggilan: "-" } } });
+    
+            if(newAnimalDetail.parent_fem && newAnimalDetail.parent_fem > 0) {
+                parentFemPromise = axios.get(`http://localhost:3000/animal/${newAnimalDetail.parent_fem}?username=${currentUser.username}&password=${currentUser.password}`);
+            }
+    
+            if(newAnimalDetail.parent_male && newAnimalDetail.parent_male > 0) {
+                parentMalePromise = axios.get(`http://localhost:3000/animal/${newAnimalDetail.parent_male}?username=${currentUser.username}&password=${currentUser.password}`);
+            }
+    
+            const [responseFem, responseMale] = await Promise.all([parentFemPromise, parentMalePromise]);
+    
+            const updatedAnimalDetail = {
+                ...newAnimalDetail,
+                nama_ibu: responseFem.data.msg.nama_panggilan,
+                nama_ayah: responseMale.data.msg.nama_panggilan
+            };
+    
+            setAnimalDetail(updatedAnimalDetail);
+    
+            fetchSuccessRate(newAnimalDetail.id_animal);
+            fetchEffectivity(newAnimalDetail.id_animal);
+        } catch (e) {
+            console.error(e);
+            setAnimalDetail((prevAnimalDetail) => ({...prevAnimalDetail, nama_ibu: "-", nama_ayah: "-"}));
+        }
     }
 
     const fetchFamilyTree = async (idAnimal) => {
         if(!idAnimal) {
+            return;
+        }
+        try {
+            const response = await axios.get(`http://localhost:3000/animal/family/${idAnimal}?username=${currentUser.username}&password=${currentUser.password}`);
+            const animalTree = response.data.msg;
+            setValueInputAnimal(animalTree.anak.nama_panggilan);
+            setAnimalTree((prevTree) => ({...prevTree, ...animalTree}));
+    
+            let newAnimalDetail = {...animalTree.anak};
+    
+            if(animalTree.anak.parent_fem && animalTree.anak.parent_fem > 0) {
+                const femParentResponse = await axios.get(`http://localhost:3000/animal/${animalTree.anak.parent_fem}?username=${currentUser.username}&password=${currentUser.password}`);
+                newAnimalDetail = {...newAnimalDetail, nama_ibu: femParentResponse.data.msg.nama_panggilan};
+            }
+    
+            if(animalTree.anak.parent_male && animalTree.anak.parent_male > 0) {
+                const maleParentResponse = await axios.get(`http://localhost:3000/animal/${animalTree.anak.parent_male}?username=${currentUser.username}&password=${currentUser.password}`);
+                newAnimalDetail = {...newAnimalDetail, nama_ayah: maleParentResponse.data.msg.nama_panggilan};
+            }
+    
+            setAnimalDetail(newAnimalDetail);
+            fetchSuccessRate(idAnimal);
+            fetchEffectivity(idAnimal);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    const fetchSuccessRate = async (idAnimal) => {
+        if(!idAnimal) {
             return
         }
-        axios.get(`http://localhost:3000/animal/family/${idAnimal}?username=${currentUser.username}&password=${currentUser.password}`).then((responseData) => {
-            const animalTree = responseData.data.msg;
-            setValueInputAnimal(animalTree.anak.nama_panggilan)
-            setAnimalTree({...animalTree})
-            setAnimalDetail({...animalTree.anak})
+        axios.get(`http://localhost:3000/prediction/h_kawin?id_animal=${idAnimal}&username=${currentUser.username}&password=${currentUser.password}`).then((responseData) => {
+            const kawinSuccessRate = responseData.data.msg;
+            setKawinSuksesRate(kawinSuccessRate)
+        });
+    }
+
+    const fetchEffectivity = async (idAnimal) => {
+        if(!idAnimal) {
+            return
+        }
+        axios.get(`http://localhost:3000/prediction/d_kawin?id_animal=${idAnimal}&username=${currentUser.username}&password=${currentUser.password}`).then((responseData) => {
+            const kawinEffectivityRate = responseData.data.msg;
+            setKawinEfektifRate(kawinEffectivityRate)
         });
     }
 
@@ -140,7 +209,7 @@ export default function FamilyTree(){
                                         class="bg-red-800 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("nenek_ayah")}
                                     >
-                                        [KAKEK AYAH: {animalTree.nenek_ayah.nama_panggilan}]
+                                        [NENEK AYAH: {animalTree.nenek_ayah.nama_panggilan}]
                                     </button>
                                 )
                             }
@@ -162,7 +231,7 @@ export default function FamilyTree(){
                                         class="bg-red-800 inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                                         onClick={() => fetchDetail("nenek_ibu")}
                                     >
-                                        [KAKEK AYAH: {animalTree.nenek_ibu.nama_panggilan}]
+                                        [NENEK IBU: {animalTree.nenek_ibu.nama_panggilan}]
                                     </button>
                                 )
                             }
@@ -278,24 +347,37 @@ export default function FamilyTree(){
                         <h1 class="text-sm font-bold leading-tight tracking-tight md:text-lg">
                             Selected animal details :
                         </h1>
-                        <h1 class="text-sm leading-tight tracking-tight md:text-md">
-                            Nama Panggilan : {animalDetail.nama_panggilan ?? "-"}
-                        </h1>
-                        <h1 class="text-sm leading-tight tracking-tight md:text-md">
-                            Nama Hewan : {animalDetail.nama_hewan ?? "-"}
-                        </h1>
-                        <h1 class="text-sm leading-tight tracking-tight md:text-md">
-                            Kode Hewan : {animalDetail.kode_hewan ?? "-"}
-                        </h1>
-                        <h1 class="text-sm leading-tight tracking-tight md:text-md">
-                            Asal Hewan : {animalDetail.asal_hewan ?? "-"}
-                        </h1> 
-                        <h1 class="text-sm leading-tight tracking-tight md:text-md">
-                            Nama Ayah Hewan : {animalDetail.parent_male ?? "-"}
-                        </h1>
-                        <h1 class="text-sm leading-tight tracking-tight md:text-md">
-                            Nama Ibu Hewan : {animalDetail.parent_fem ?? "-"}
-                        </h1>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Nama Panggilan : {animalDetail.nama_panggilan ?? "-"}
+                                </h1>
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Nama Hewan : {animalDetail.nama_hewan ?? "-"}
+                                </h1>
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Kode Hewan : {animalDetail.kode_hewan ?? "-"}
+                                </h1>
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Asal Hewan : {animalDetail.asal_hewan ?? "-"}
+                                </h1> 
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Nama Ayah Hewan : {animalDetail.nama_ayah ?? "-"}
+                                </h1>
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Nama Ibu Hewan : {animalDetail.nama_ibu ?? "-"}
+                                </h1>
+                            </div>
+                            <div>
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Breeding success rate : <b>{kawinSuksesRate ?? "-"}</b>
+                                </h1>
+                                <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
+                                    Breeding effectivity : <b>{kawinEfektifRate ?? "-"}</b>
+                                </h1>
+                            </div>
+                        </div>
+                        
                         <div class="flex justify-end">
                             {
                                 (animalDetail.id_animal && animalDetail.id_animal !== animalTree.anak.id_animal) && (

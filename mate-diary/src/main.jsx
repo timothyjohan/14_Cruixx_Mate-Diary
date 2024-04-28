@@ -15,8 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import HomeLogged from './pages/HomeLogged.jsx';
 import MyAnimals from './pages/MyAnimals.jsx';
 import AddAnimal from './pages/AddAnimal.jsx';
-import AddSession from './pages/AddSession.jsx';
 import Subscription from './pages/Subscription.jsx';
+import AddSession from './pages/AddSession.jsx';
 
 const router = createBrowserRouter([
   {
