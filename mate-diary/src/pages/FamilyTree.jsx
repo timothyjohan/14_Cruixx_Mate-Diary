@@ -16,6 +16,7 @@ export default function FamilyTree(){
     const [timerId, setTimerId] = useState(null)
     const [kawinSuksesRate, setKawinSuksesRate] = useState("")
     const [kawinEfektifRate, setKawinEfektifRate] = useState("")
+    const [premium, setPremium] = useState(false)
 
     const [cookies, setCookie, removeCookie] = useCookies(['currentUser', 'currentAnimal']);
     const [currentUser, setCurrentUser] = useState(null)
@@ -369,11 +370,12 @@ export default function FamilyTree(){
                                 </h1>
                             </div>
                             <div>
+                                
                                 <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
-                                    Breeding success rate : <b>{kawinSuksesRate ?? "-"}</b>
+                                    Breeding success rate : <b className={premium ? "" : "blur"}>{kawinSuksesRate ?? "-"}</b>
                                 </h1>
                                 <h1 class="my-3 text-sm leading-tight tracking-tight md:text-md">
-                                    Breeding effectivity : <b>{kawinEfektifRate ?? "-"}</b>
+                                    Breeding effectivity : <b className={premium ? "" : "blur"}>{kawinEfektifRate ?? "-"}</b>
                                 </h1>
                             </div>
                         </div>
