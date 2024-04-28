@@ -25,6 +25,7 @@ export default function ShowDetailHistory() {
         
         const result = await axios.put(`http://localhost:3000/history/details?username=${cookies.currentUser}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}&status=${status}&id_d_kawin=${id}`)
         emitToast(`Updated Successfully`, "success")
+        fetchHistory();
     } catch (error) {
         if(e.response.data.msg) {
             emitToast(e.response.data.msg, "error")
@@ -39,6 +40,7 @@ export default function ShowDetailHistory() {
         
         const result = await axios.post(`http://localhost:3000/history/details?username=${cookies.currentUser}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}`)
         emitToast(`Added Successfully`, "success")
+        fetchHistory()
     } catch (error) {
         if(e.response.data.msg) {
             emitToast(e.response.data.msg, "error")
@@ -53,6 +55,7 @@ export default function ShowDetailHistory() {
         
         const result = await axios.put(`http://localhost:3000/history?username=${cookies.currentUser}&password=${currentUser.password}&id_h_kawin=${id_h_kawin}&status=${status}`)
         emitToast(`Updated Successfully`, "success")
+        fetchHistory()
     } catch (error) {
         if(e.response.data.msg) {
             emitToast(e.response.data.msg, "error")

@@ -28,7 +28,7 @@ export default function AddSession(){
         console.log(data);
         try {
             const result = await axios.post(`http://localhost:3000/history?username=${currentUser.username}&password=${currentUser.password}`, data)
-            emitToast(`${data.username} Success!`, "success")
+            emitToast(`$Session add Success!`, "success")
         } catch (error) {
             emitToast(error.response.data.msg, "error")
             
